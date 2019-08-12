@@ -13,7 +13,7 @@ also expensive to run. In fact, due to the nature of single function kernels,
 Legionella enables a number of LLVM options which would too costly to run for
 all crates.
 
-Currently, AMDGPU is the focus. In the future, support for generating eBPF
+Currently, AMDGPU and HPC is the focus. In the future, support for generating eBPF
 functions will be added. Later, HLS will be supported.
 
 ## How does this work?
