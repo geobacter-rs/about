@@ -82,7 +82,7 @@ directly from `rustup`.
 
 So you'll need to build the Rust toolchain yourself. See BUILD.md.
 
-TODO :construction:
+TODO :construction: offer prebuilt packages.
 
 ## How do I code with this?
 
