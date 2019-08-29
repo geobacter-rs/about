@@ -1,17 +1,20 @@
-# The Legionella Rust Compiler and Runtime :construction:
+# The Geobacter Rust Compiler and Runtime :construction:
 
-This repository houses info about Legionella; how to use it, how all these
-repositories fit together, and how Legionella (ab)uses the Rust compiler to
+This repository houses info about Geobacter; how to use it, how all these
+repositories fit together, and how Geobacter (ab)uses the Rust compiler to
 support its magic.
 
-## What is Legionella?
+## What is Geobacter?
 
-Legionella is a framework to support single source accelerator programming,
-without requiring compiling from source twice. However, Legionella is *not* a
+Geobacter is a framework to support single source accelerator programming,
+without requiring compiling from source twice. However, Geobacter is *not* a
 JIT; the expectation is that kernels are invoked repeatedly and are possibly
 also expensive to run. In fact, due to the nature of single function kernels,
-Legionella enables a number of LLVM options which would too costly to run for
+Geobacter enables a number of LLVM options which would too costly to run for
 all crates.
+
+The name Geobacter comes from the first discovered bacteria which can oxidize
+organic components using iron oxide as an electron acceptor.
 
 Currently, AMDGPU and HPC is the focus. In the future, support for generating eBPF
 functions will be added. Later, HLS will be supported.
@@ -65,7 +68,7 @@ This target isn't receiving any support ATM, and is currently broken. SPIRV and 
 aren't really ready for each other. Maybe someday!
 
 <!--
-Legionella supports (or will, once a proc-macro gets written help with this)
+Geobacter supports (or will, once a proc-macro gets written help with this)
 single definition descriptor set/binding numbers; that is, both the resulting
 SPIR-V global and the host code will use the same numbers when they refer to the
 global or binding type, respectively.

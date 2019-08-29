@@ -3,8 +3,8 @@
 
 First you'll need to create the `Context`:
 ```rust
-extern crate legionella_runtime_core as lrt_core;
-use lrt_core::context::Context;
+extern crate geobacter_runtime_core as grt_core;
+use grt_core::context::Context;
 
 # fn main() {
   let ctx = Context::new().expect("create context");
@@ -15,11 +15,11 @@ use lrt_core::context::Context;
 
 First we have to create the AMDGPU device object:
 ```rust
-extern crate legionella_runtime_amd  as lrt_amd;
-extern crate legionella_runtime_core as lrt_core;
+extern crate geobacter_runtime_amd  as grt_amd;
+extern crate geobacter_runtime_core as grt_core;
 
-use lrt_amd::HsaAmdGpuAccel;
-use lrt_core::context::Context;
+use grt_amd::HsaAmdGpuAccel;
+use grt_core::context::Context;
 
 # fn main() -> Result<(), Box<dyn Error>> {
   let ctx = Context::new()?;
