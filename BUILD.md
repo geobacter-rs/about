@@ -1,7 +1,7 @@
 
 Sadly, due to the nature of the custom driver and how it is currently installed
 over the unmodified Rust driver (to keep the set of patches I have to periodically
-rebase on top of Rust `master`), Geobacter has no prebuilt packages available. :(
+rebase on top of Rust `master` small), Geobacter has no prebuilt packages available. :(
 
 # Building the Geobacter Rust Compiler
 
