@@ -14,6 +14,11 @@ fn main() -> Result<(), Box<dyn Error>> {
 }
 ```
 
+You'll need to compile all of your programs with
+`RUSTFLAGS=-Z always-encode-mir -Z always-emit-metadata`! 
+This used to be set automatically, but that was changed when Geobacter's drivers were
+integrated into Geobacter's Rust fork.
+
 # AMDGPU
 
 Before we begin, please note that the `geobacter_runtime_amd` crate is unstable, and will likely 
