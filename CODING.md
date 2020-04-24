@@ -32,7 +32,7 @@ Some general bad behaviour:
   different virtual function table pointers. Ie passing your kernel `(&() as &dyn Any)` and then 
   calling `Any::type_id` on it will fault (though the lack of virtual dispatch makes this hard to
   trigger)!
-* Stack references. The stack is not in accessible memory!
+* Host stack references. Host stacks are not in accessible memory!
 * Allocating in kernels/device side. Use custom allocators if you really need it.
 * Calling a function which uses `asm!`.
 * Anything not Rust code, including anything called via FFI. This includes calling
