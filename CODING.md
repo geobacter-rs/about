@@ -34,6 +34,11 @@ Some general bad behaviour:
   trigger)!
 * Stack references. The stack is not in accessible memory!
 * Allocating in kernels/device side. Use custom allocators if you really need it.
+* Calling a function which uses `asm!`.
+* Anything not Rust code, including anything called via FFI. This includes calling
+  anything in libc.
+
+Everything else is fair game.
 
 Some non-issues:
 * 32bit system controlling a 64bit device. HSA requires that all agents use the same pointer size.
