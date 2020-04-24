@@ -37,6 +37,8 @@ Some general bad behaviour:
 * Calling a function which uses `asm!`.
 * Anything not Rust code, including anything called via FFI. This includes calling
   anything in libc.
+* Panics. These aren't actually disallowed, but panicking will cause the workitem to
+  terminate. *No drops run if this happens*, the workitem just stops.
 
 Everything else is fair game.
 
