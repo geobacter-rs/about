@@ -82,7 +82,7 @@ struct MyKernel<'a> {
   /// For GPUs, "waited on" means the signal can be used in barrier submissions.
   completion: GlobalSignal,
 
-  // Now the whatever data is required by the kernel:
+  // Now whatever data is required by the kernel:
   /// The input data. NOTE: this absolutely *MUST* reside in GPU accessible memory. Geobacter provides 
   /// utilities for ensuring this, like `LapVec`/`LapBox`. Crucially, stack memory is not accessible
   /// to the GPU! This might be fixed someday, not today.  
