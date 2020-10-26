@@ -33,7 +33,8 @@ Some general bad behaviour:
   calling `Any::type_id` on it will fault (though the lack of virtual dispatch makes this hard to
   trigger)!
 * Host stack references. Host stacks are not in accessible memory!
-* Allocating in kernels/device side. Use custom allocators if you really need it.
+* Allocating on the GPU. You can use a bump allocator, allocated on the host, on the
+  GPU to allocate.
 * Calling a function which uses `asm!`.
 * Anything not Rust code, including anything called via FFI. This includes calling
   anything in libc.
@@ -77,7 +78,7 @@ struct MyKernel<'a> {
   /// A `DeviceMultiQueue` is one that implements Sync.
   queue: DeviceMultiQueue,
   /// The signal decremented by the GPU when the dispatch completes. This signal is omitted from the
-  /// deps used for dispatching (otherwise, it would block for ever!)
+  /// deps used for dispatching (otherwise, it would block forever!)
   /// `GlobalSignal` is a signal type which can be waited on by all HSA agents on your system.
   /// For GPUs, "waited on" means the signal can be used in barrier submissions.
   completion: GlobalSignal,
@@ -450,6 +451,10 @@ can actually use the memory. (Perhaps supporting Vulkan instead wouldn't be so b
 In the future, Geobacter's Amd runtime will likely go this route so that GPU VRAM
 `Box`es can be moved freely between device and host. Host access won't be fast, but
 it'll work.
+
+If you have a GPU and motherboard with PCIe Large Bar enabled, you can allocate GPU
+memory (ie using `RawPoolBox`) and it will be Host accessible. HSA doesn't tell us this
+fact however, so you'll have to know this fact a-priori.
 
 ## Textures
 
