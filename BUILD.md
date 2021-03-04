@@ -5,8 +5,8 @@ rebase on top of Rust `master` small), Geobacter has no prebuilt packages availa
 
 # Building the Geobacter Rust Compiler
 
-In a checkout of Geobacter, run: 
-`cargo run --manifest-path rust-builder/Cargo.toml -- --target-dir ../geobacter-rust --rustup`.
+In a checkout of Geobacter, run:
+`cargo run --manifest-path rust-builder/Cargo.toml -- --target-dir ../geobacter-rust`.
 This will automatically checkout the Geobacter Rust sources, setup a config with the specific
 options we need, build vanilla Rust, install our custom drivers, and then setup `rustup` with
 a local toolchain named `geobacter`.
