@@ -223,7 +223,7 @@ fn main() -> Result<(), Box<dyn Error>> {
   // An allocator which allocates on the first NUMA node in your system.
   // This implies the GPU will read from system RAM. For serious work, you'll likely
   // want to move this sort of stuff into GPU RAM, but you'll still have to first
-  // allocate it in something like this. 
+  // allocate it in something like this (unless large BAR is available). 
   let alloc = dev.fine_lap_node_alloc(0); 
   let mut input = LapVec::new_in(alloc.clone());
 

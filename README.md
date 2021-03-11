@@ -49,23 +49,38 @@ optimizations and (if applicable) sending it to a target machine a second time w
 
 ### AMDGPU
 
-This target works out of the box, though dispatch requires some unsafety as the
-design is still settling down.
+This target works out of the box, though dispatch requires some unsafety as there are 
+still unsolved foot guns surrounding passing references to device inaccessible memory 
+(like the stack!) to kernels. Additionally, kernel outputs have to be explicitly 
+passed by pointer, because `&mut ` must be unique, but all workitems share the same 
+argument values!
+
+"Extra" features:
+* Nice interface to specify kernel launch bounds and get the workitem/workgroup ids 
+  efficiently,
+* Device visible host memory allocators,
+* Device memory allocation, but this can't be used in `Box`/etc because large BAR 
+  can't be guaranteed,
+* Device textures,
+* Device side signals,
+* (Mostly) Safe LDS (workgroup memory) interfaces for a few usage scenarios.
 
 TODOs :construction:
-* Device side signals (for finer grained resource management)
-* Device side qeueus  (for device side enqueue)
-Requires casting the signal/queue handle to a AMD specifc signal/queue structure, which
-is probably internal impl detail. Must also implement the `hsa_signal_*` and `hsa_queue_*`
-functions in Rust. See [hsaqs.cl](https://github.com/RadeonOpenCompute/ROCm-Device-Libs/blob/master/ockl/src/hsaqs.cl).
-
-* Device side allocation.
-* Texture/Image support. Currently only "raw" buffers are usable.
+* Nicer cross-bar interfaces.
+* Adapt OpenCL std functions to have Geobacter equivalents.
+* Safe output writes: two workitems must not create mutable references to the 
+  same variable.
+* Device side enqueue: need mechanisms to embed child kernel image handles in the parent 
+  kernel.
+* Device -> host MPSC channels.
 
 ### Vulkan/SPIRV
 
-This target isn't receiving any support ATM, and is currently broken. SPIRV and LLVM
-aren't really ready for each other. Maybe someday!
+Vulkan/SPIR-V isn't nearly as well supported as AMDGPU, but "simple" compute kernels 
+should work, and there currently isn't a guide for its use.
+
+Geobacter requires that your Vulkan implementation support the physical storage buffer 
+addresses and variable pointers extensions.
 
 <!--
 Geobacter supports (or will, once a proc-macro gets written help with this)
@@ -77,6 +92,10 @@ The hope is to also allow creating entire graphics pipelines; ie vertex,
 geometry, tess (eval and control), raytracing, and fragment "kernels", which are
 then codgenned into a single SPIR-V module.
 -->
+
+### Cuda
+
+No support.
 
 ## How to get the toolchain?
 
@@ -93,7 +112,6 @@ See CODING.md! :^)
 
 ## Who is working on this?
 
-Vitality Studios offers paid support to help you accelerate your applications!
-We are available for hire; inquires should be made to `dick`(at)`vitalitystudios.com`.
+Richard Diamond works on this in his free time.
 
 New contributors are absolutely welcome.
